@@ -2,27 +2,14 @@
 
 index | content
 --- | ---
-1 | [Create Directory](#create-directory)
-2 | [Generate Root CA Private Key](#generate-root-ca-private-key)
-3 | [Create Self-Signed Root CA Certificate](#create-self-signed-root-ca-certificate)
-4 | [Generate Server Certificate Signing Request (CSR)](#generate-server-certificate-signing-request-csr)
-5 | [Sign Server CSR with Root CA](#sign-server-csr-with-root-ca)
-6 | [Enable UFW Firewall](#enable-ufw-firewall)
-7 | [Check UFW Status](#check-ufw-status)
-8 | [List Available Application Profiles in UFW](#list-available-application-profiles-in-ufw)
-9 | [Allow Web Traffic (HTTP and HTTPS)](#allow-web-traffic-http-and-https)
-10 | [Enable SSL Module for Apache](#enable-ssl-module-for-apache)
-11 | [Edit Apache Virtual Host Configuration](#edit-apache-virtual-host-configuration)
-12 | [Create Document Root Directory](#create-document-root-directory)
-13 | [Create Index File](#create-index-file)
-14 | [Enable Site  Configuration](#enable-site--configuration)
-15 | [Restart Apache](#restart-apache)
-16 | [Test Apache Configuration](#test-apache-configuration)
-17 | [Reload Apache](#reload-apache)
+I | [Generate Certificates](#I--generate-certificates)
+II | [Apache configuration](#II--apache-configuration)
+III | [Enable UFW Firewall](#III--enable-ufw-firewall)
+IV | [Redirect HTTP to HTTPS](#IV--redirect-http-to-https)
 
 
 
-## Create Directory
+### Create Directory
 ```bash
 mkdir https_lab
 cd https_lab
@@ -32,7 +19,11 @@ cd https_lab
 mkdir https_lab: Creates a new directory named https_lab.
 cd https_lab: Changes the current working directory to https_lab.
 ~~~
-## Generate Root CA Private Key
+
+
+## I- Generate Certificates:
+
+### Generate Root CA Private Key
 
 ```bash
 openssl genrsa -aes256 -out MyOrg_rootCA.key 4096
@@ -47,9 +38,9 @@ genrsa: Generates an RSA private key.
 ~~~
 
 
-## Create Self-Signed Root CA Certificate
+### Create Self-Signed Root CA Certificate
 ```bash
-openssl req -x509 -new -nodes -key MyOrg_rootCA.key -sha256 -days 1826 -out MyOrg_rootCA.crt -subj '/CN=My RootCA/C=DZ/ST=TO/L=TiziOuzou/O=MyOrganisation'
+openssl req -x509 -new -nodes -key MyOrg_rootCA.key -sha256 -days 1826 -out MyOrg_rootCA.crt 
 ```
 `the command in details :`
 ~~~
@@ -64,9 +55,10 @@ req: PKCS#10 certificate request and certificate generating utility.
 -subj: Specifies the subject information to be used for the certificate.
 '/CN=My RootCA/C=DZ/ST=TO/L=TiziOuzou/O=MyOrganisation' : Specifies the subject information to be used for the certificate.
 ~~~
-## Generate Server Certificate Signing Request (CSR)
+
+### Generate Server Certificate Signing Request (CSR)
 ```bash
-openssl req -new -nodes -out myserver.local.csr -newkey rsa:4096 -keyout myserver.local.key -subj '/CN=My firewall/C=DZ/ST=TO/L=TiziOuzou/O=MyOrganisation'
+openssl req -new -nodes -out myserver.local.csr -newkey rsa:4096 -keyout myserver.local.key 
 ```
 `the command in details :`
 ~~~
@@ -81,7 +73,7 @@ rsa:4096: Specifies the number of bits in the key to create.
 '/CN=My firewall/C=DZ/ST=TO/L=TiziOuzou/O=MyOrganisation' : Specifies the subject information to be used for the certificate.
 ~~~
 
-## Sign Server CSR with Root CA
+### Sign Server CSR with Root CA
 ```bash
 openssl x509 -req -in myserver.local.csr -CA MyOrg_rootCA.crt -CAkey MyOrg_rootCA.key -CAcreateserial -out myserver.local.crt -days 365 -sha256
 ```
@@ -98,52 +90,9 @@ x509: Certificate display and signing utility.
 -sha256: Uses the SHA-256 algorithm to create the certificate hash.
 ~~~
 
-## Enable UFW Firewall
-```bash
-sudo ufw enable
-```
-`the command in details :`
-~~~
-sudo: Runs the command as root.
-ufw: Uncomplicated Firewall.
-enable: Enables the firewall.
-~~~
+## II- Apache configuration:
 
-## Check UFW Status
-```bash
-sudo ufw status
-```
-`the command in details :`
-~~~
-sudo: Runs the command as root.
-ufw: Uncomplicated Firewall.
-status: Displays the status of the firewall.
-~~~
-
-## List Available Application Profiles in UFW
-```bash
-sudo ufw applist
-```
-`the command in details :`
-~~~
-sudo: Runs the command as root.
-ufw: Uncomplicated Firewall.
-applist: Displays a list of available application profiles.
-~~~
-
-## Allow Web Traffic (HTTP and HTTPS)
-```bash
-sudo ufw allow "WWW Full"
-```
-`the command in details :`
-~~~
-sudo: Runs the command as root.
-ufw: Uncomplicated Firewall.
-allow: Allows traffic.
-"WWW Full": Specifies the application profile to allow.
-~~~
-
-## Enable SSL Module for Apache
+### Enable SSL Module for Apache
 ```bash
 sudo a2enmod ssl
 ```
@@ -154,7 +103,7 @@ a2enmod: Enables an Apache module.
 ssl: Specifies the module to enable.
 ~~~
 
-## Edit Apache Virtual Host Configuration
+### Edit Apache Virtual Host Configuration
 ```bash
 sudo nano /etc/apache2/sites-available/myserver.local.conf
 ```
@@ -167,11 +116,6 @@ nano: A text editor.
 
 `the content of the file :`
 ```bash
-<VirtualHost *:80>
-        ServerName myserver.local
-        Redirect / https://localhost/
-</VirtualHost>
-
 <VirtualHost *:443>
    ServerName myserver.local
    DocumentRoot /var/www/myserver.local
@@ -182,7 +126,7 @@ nano: A text editor.
 </VirtualHost>
 ```
 
-## Create Document Root Directory
+### Create Document Root Directory
 ```bash
 sudo mkdir /var/www/myserver.local
 ```
@@ -193,7 +137,7 @@ mkdir: Creates a new directory.
 /var/www/myserver.local: Specifies the directory to create.
 ~~~
 
-## Create Index File
+### Create Index File
 ```bash
 sudo nano /var/www/myserver.local/index.html
 ```
@@ -209,7 +153,7 @@ sudo nano /var/www/myserver.local/index.html
 </html>
 ```
 
-## Enable Site  Configuration
+### Enable Site  Configuration
 
 ```bash
 sudo a2ensite myserver.local.conf
@@ -222,7 +166,7 @@ a2ensite: Enables an Apache site.
 myserver.local.conf: Specifies the site to enable.
 ~~~
 
-## Restart Apache
+### Restart Apache
 ```bash
 sudo systemctl restart apache2
 ```
@@ -234,7 +178,7 @@ systemctl: Controls the systemd system and service manager.
 restart: Restarts the Apache service.
 ~~~
 
-## Test Apache Configuration
+### Test Apache Configuration
 ```bash
 sudo apachectl configtest
 ```
@@ -245,7 +189,7 @@ apachectl: Controls the Apache HTTP server.
 configtest: Tests the Apache configuration file for errors.
 ~~~
 
-## Reload Apache
+### Reload Apache
 ```bash
 sudo systemctl reload apache2
 ```
@@ -254,4 +198,80 @@ sudo systemctl reload apache2
 sudo: Runs the command as root.
 systemctl: Controls the systemd system and service manager.
 reload: Reloads the Apache service.
+~~~
+
+## III- Enable UFW Firewall
+```bash
+sudo ufw enable
+```
+`the command in details :`
+~~~
+sudo: Runs the command as root.
+ufw: Uncomplicated Firewall.
+enable: Enables the firewall.
+~~~
+
+### Check UFW Status
+```bash
+sudo ufw status
+```
+`the command in details :`
+~~~
+sudo: Runs the command as root.
+ufw: Uncomplicated Firewall.
+status: Displays the status of the firewall.
+~~~
+
+### List Available Application Profiles in UFW
+```bash
+sudo ufw applist
+```
+`the command in details :`
+~~~
+sudo: Runs the command as root.
+ufw: Uncomplicated Firewall.
+applist: Displays a list of available application profiles.
+~~~
+
+### Allow Web Traffic (HTTP and HTTPS)
+```bash
+sudo ufw allow "WWW Full"
+```
+`the command in details :`
+~~~
+sudo: Runs the command as root.
+ufw: Uncomplicated Firewall.
+allow: Allows traffic.
+"WWW Full": Specifies the application profile to allow.
+~~~
+
+IV- Redirect HTTP to HTTPS
+```bash
+sudo nano /etc/apache2/sites-available/myserver.local.conf
+```
+`the command in details :`
+~~~
+sudo: Runs the command as root.
+nano: A text editor.
+/etc/apache2/sites-available/myserver.local.conf: Specifies the file to edit.
+~~~
+
+`add this content to the file :`
+```bash
+<VirtualHost *:80>
+   ServerName myserver.local
+   Redirect permanent / https://myserver.local/
+</VirtualHost>
+
+```
+
+### Restart Apache
+```bash
+sudo systemctl restart apache2
+```
+`the command in details :`
+~~~
+sudo: Runs the command as root.
+systemctl: Controls the systemd system and service manager.
+restart: Restarts the Apache service.
 ~~~
