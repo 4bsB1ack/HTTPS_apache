@@ -76,7 +76,7 @@ req: PKCS#10 certificate request and certificate generating utility.
 
 ### Generate Server Certificate Signing Request (CSR)
 ```console
-openssl req -new -nodes -out myserver.local.csr -newkey rsa:4096 -keyout myserver.local.key 
+openssl req -new -nodes -out mywebserver.local.csr -newkey rsa:4096 -keyout mywebserver.local.key 
 ```
 `the command in details :`
 ~~~
@@ -91,7 +91,7 @@ rsa:4096: Specifies the number of bits in the key to create.
 
 ### Sign Server CSR with Root CA
 ```console
-openssl x509 -req -in myserver.local.csr -CA MyOrg_rootCA.crt -CAkey MyOrg_rootCA.key -CAcreateserial -out myserver.local.crt -days 365 -sha256
+openssl x509 -req -in mywebserver.local.csr -CA MyOrg_rootCA.crt -CAkey MyOrg_rootCA.key -CAcreateserial -out mywebserver.local.crt -days 365 -sha256
 ```
 `the command in details :`
 ~~~
@@ -121,41 +121,41 @@ ssl: Specifies the module to enable.
 
 ### Edit Apache Virtual Host Configuration
 ```console
-sudo nano /etc/apache2/sites-available/myserver.local.conf
+sudo nano /etc/apache2/sites-available/mywebserver.local.conf
 ```
 `the command in details :`
 ~~~
 sudo: Runs the command as root.
 nano: A text editor.
-/etc/apache2/sites-available/myserver.local.conf: Specifies the file to edit.
+/etc/apache2/sites-available/mywebserver.local.conf: Specifies the file to edit.
 ~~~
 
 `the content of the file :`
 ```conf
 <VirtualHost *:443>
-   ServerName myserver.local
-   DocumentRoot /var/www/myserver.local
+   ServerName mywebserver.local
+   DocumentRoot /var/www/mywebserver.local
 
    SSLEngine on
-   SSLCertificateFile /home/kali/rmse/https_lab/myserver.local.crt
-   SSLCertificateKeyFile /home/kali/rmse/https_lab/myserver.local.key
+   SSLCertificateFile /home/kali/rmse/https_lab/mywebserver.local.crt
+   SSLCertificateKeyFile /home/kali/rmse/https_lab/mywebserver.local.key
 </VirtualHost>
 ```
 
 ### Create Document Root Directory
 ```console
-sudo mkdir /var/www/myserver.local
+sudo mkdir /var/www/mywebserver.local
 ```
 `the command in details :`
 ~~~
 sudo: Runs the command as root.
 mkdir: Creates a new directory.
-/var/www/myserver.local: Specifies the directory to create.
+/var/www/mywebserver.local: Specifies the directory to create.
 ~~~
 
 ### Create Index File
 ```console
-sudo nano /var/www/myserver.local/index.html
+sudo nano /var/www/mywebserver.local/index.html
 ```
 `the content of the file :`
 ```html
@@ -172,14 +172,14 @@ sudo nano /var/www/myserver.local/index.html
 ### Enable Site  Configuration
 
 ```console
-sudo a2ensite myserver.local.conf
+sudo a2ensite mywebserver.local.conf
 ```
 
 `the command in details :`
 ~~~
 sudo: Runs the command as root.
 a2ensite: Enables an Apache site.
-myserver.local.conf: Specifies the site to enable.
+mywebserver.local.conf: Specifies the site to enable.
 ~~~
 
 ### Restart Apache
@@ -263,23 +263,23 @@ allow: Allows traffic.
 
 ## IV- Redirect HTTP to HTTPS
 ```console
-sudo nano /etc/apache2/sites-available/myserver.local.conf
+sudo nano /etc/apache2/sites-available/mywebserver.local.conf
 ```
 `the command in details :`
 ~~~
 sudo: Runs the command as root.
 nano: A text editor.
-/etc/apache2/sites-available/myserver.local.conf: Specifies the file to edit.
+/etc/apache2/sites-available/mywebserver.local.conf: Specifies the file to edit.
 ~~~
 
 `add this content to the file :`
 ```conf
 <VirtualHost *:80>
-   ServerName myserver.local
-   Redirect permanent / https://myserver.local/
+   ServerName mywebserver.local
+   Redirect permanent / https://10.10.1.10/
 </VirtualHost>
-
 ```
+-  `Redirect permanent / https://10.10.1.10/` is just un **exemple**, you can change it to your own domain name.
 
 ### Restart Apache
 ```console
