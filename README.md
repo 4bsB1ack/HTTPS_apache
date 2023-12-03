@@ -43,7 +43,7 @@ cd https_lab: Changes the current working directory to https_lab.
 
 ## I- Generate Certificates:
 
-### Generate Root CA Private Key
+### Generate Root CA (Certificate Authority) Private Key
 
 ```console
 openssl genrsa -aes256 -out MyOrg_rootCA.key 4096
