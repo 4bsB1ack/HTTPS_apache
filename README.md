@@ -1,4 +1,4 @@
-# Lab Setup Guide: Hosting an HTTPS Website with Apache and Certificates On linux
+# Lab Setup Guide: Hosting an HTTPS Website with Apache and Certificates
 
 index | content
 --- | ---
@@ -265,7 +265,7 @@ allow: Allows traffic.
 "WWW Full": Specifies the application profile to allow.
 ~~~
 
-IV- Redirect HTTP to HTTPS
+## IV- Redirect HTTP to HTTPS
 ```bash
 sudo nano /etc/apache2/sites-available/myserver.local.conf
 ```
