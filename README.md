@@ -34,7 +34,7 @@ Before you begin, make sure you have the following:
 mkdir https_lab
 cd https_lab
 ```
-`the command in details :`
+the command in details :
 ~~~
 mkdir https_lab: Creates a new directory named https_lab.
 cd https_lab: Changes the current working directory to https_lab.
@@ -48,7 +48,7 @@ cd https_lab: Changes the current working directory to https_lab.
 ```console
 openssl genrsa -aes256 -out MyOrg_rootCA.key 4096
 ```
-`the command in details :`
+the command in details :
 ~~~
 openssl: OpenSSL command line tool.
 genrsa: Generates an RSA private key.
@@ -62,7 +62,7 @@ genrsa: Generates an RSA private key.
 ```console
 openssl req -x509 -new -nodes -key MyOrg_rootCA.key -sha256 -days 1826 -out MyOrg_rootCA.crt 
 ```
-`the command in details :`
+the command in details :
 ~~~
 req: PKCS#10 certificate request and certificate generating utility.
 -x509: Creates a self-signed certificate.
@@ -78,7 +78,7 @@ req: PKCS#10 certificate request and certificate generating utility.
 ```console
 openssl req -new -nodes -out mywebserver.local.csr -newkey rsa:4096 -keyout mywebserver.local.key 
 ```
-`the command in details :`
+the command in details :
 ~~~
 req: PKCS#10 certificate request and certificate generating utility.
 -new: Generates a new certificate request.
@@ -93,7 +93,7 @@ rsa:4096: Specifies the number of bits in the key to create.
 ```console
 openssl x509 -req -in mywebserver.local.csr -CA MyOrg_rootCA.crt -CAkey MyOrg_rootCA.key -CAcreateserial -out mywebserver.local.crt -days 365 -sha256
 ```
-`the command in details :`
+the command in details :
 ~~~
 x509: Certificate display and signing utility.
 -req: Creates a certificate request.
@@ -112,7 +112,7 @@ x509: Certificate display and signing utility.
 ```console
 sudo a2enmod ssl
 ```
-`the command in details :`
+the command in details :
 ~~~
 sudo: Runs the command as root.
 a2enmod: Enables an Apache module.
@@ -123,7 +123,7 @@ ssl: Specifies the module to enable.
 ```console
 sudo nano /etc/apache2/sites-available/mywebserver.local.conf
 ```
-`the command in details :`
+the command in details :
 ~~~
 sudo: Runs the command as root.
 nano: A text editor.
@@ -146,7 +146,7 @@ nano: A text editor.
 ```console
 sudo mkdir /var/www/mywebserver.local
 ```
-`the command in details :`
+the command in details :
 ~~~
 sudo: Runs the command as root.
 mkdir: Creates a new directory.
@@ -175,7 +175,7 @@ sudo nano /var/www/mywebserver.local/index.html
 sudo a2ensite mywebserver.local.conf
 ```
 
-`the command in details :`
+the command in details :
 ~~~
 sudo: Runs the command as root.
 a2ensite: Enables an Apache site.
@@ -187,7 +187,7 @@ mywebserver.local.conf: Specifies the site to enable.
 sudo systemctl restart apache2
 ```
 
-`the command in details :`
+the command in details :
 ~~~
 sudo: Runs the command as root.
 systemctl: Controls the systemd system and service manager.
@@ -198,7 +198,7 @@ restart: Restarts the Apache service.
 ```console
 sudo apachectl configtest
 ```
-`the command in details :`
+the command in details :
 ~~~
 sudo: Runs the command as root.
 apachectl: Controls the Apache HTTP server.
@@ -209,7 +209,7 @@ configtest: Tests the Apache configuration file for errors.
 ```console
 sudo systemctl reload apache2
 ```
-`the command in details :`
+the command in details :
 ~~~
 sudo: Runs the command as root.
 systemctl: Controls the systemd system and service manager.
@@ -220,7 +220,7 @@ reload: Reloads the Apache service.
 ```console
 sudo ufw enable
 ```
-`the command in details :`
+the command in details :
 ~~~
 sudo: Runs the command as root.
 ufw: Uncomplicated Firewall.
@@ -231,7 +231,7 @@ enable: Enables the firewall.
 ```console
 sudo ufw status
 ```
-`the command in details :`
+the command in details :
 ~~~
 sudo: Runs the command as root.
 ufw: Uncomplicated Firewall.
@@ -242,7 +242,7 @@ status: Displays the status of the firewall.
 ```console
 sudo ufw applist
 ```
-`the command in details :`
+the command in details :
 ~~~
 sudo: Runs the command as root.
 ufw: Uncomplicated Firewall.
@@ -253,7 +253,7 @@ applist: Displays a list of available application profiles.
 ```console
 sudo ufw allow "WWW Full"
 ```
-`the command in details :`
+the command in details :
 ~~~
 sudo: Runs the command as root.
 ufw: Uncomplicated Firewall.
@@ -265,7 +265,7 @@ allow: Allows traffic.
 ```console
 sudo nano /etc/apache2/sites-available/mywebserver.local.conf
 ```
-`the command in details :`
+the command in details :
 ~~~
 sudo: Runs the command as root.
 nano: A text editor.
@@ -285,7 +285,7 @@ nano: A text editor.
 ```console
 sudo systemctl restart apache2
 ```
-`the command in details :`
+the command in details :
 ~~~
 sudo: Runs the command as root.
 systemctl: Controls the systemd system and service manager.
