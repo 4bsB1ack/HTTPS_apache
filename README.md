@@ -27,6 +27,7 @@ index | content
 mkdir https_lab
 cd https_lab
 ```
+`the command in details :`
 ~~~
 mkdir https_lab: Creates a new directory named https_lab.
 cd https_lab: Changes the current working directory to https_lab.
