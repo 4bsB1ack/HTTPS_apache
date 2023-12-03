@@ -1,4 +1,4 @@
-# HTTPS Lab Setup
+# Lab Setup Guide: Hosting an HTTPS Website with Apache and Certificates On linux
 
 index | content
 --- | ---
@@ -6,6 +6,26 @@ I | [Generate Certificates](#I--generate-certificates)
 II | [Apache configuration](#II--apache-configuration)
 III | [Enable UFW Firewall](#III--enable-ufw-firewall)
 IV | [Redirect HTTP to HTTPS](#IV--redirect-http-to-https)
+
+
+## Introduction
+In this lab, we will walk through the process of setting up an HTTPS-enabled website using the Apache web server and SSL/TLS certificates. 
+This ensures a secure and encrypted connection between the user's browser and your server.
+
+## Prerequisites
+Before you begin, make sure you have the following:
+
+- A server with Apache installed
+- Basic knowledge of the Linux command line
+
+## Language and Tools Used
+<p align="left"> 
+<a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a>
+<a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash" width="40" height="40"/> </a> 
+<a href="https://httpd.apache.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/apache/apache-icon.svg" alt="bash" width="40" height="40"/> </a> <a href="https://www.openssl.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/openssl/openssl-ar21.svg" alt="bash" width="60" height="40"/> </a>
+</p>
+
+
 
 
 
@@ -275,3 +295,5 @@ sudo: Runs the command as root.
 systemctl: Controls the systemd system and service manager.
 restart: Restarts the Apache service.
 ~~~
+
+
