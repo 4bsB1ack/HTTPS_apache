@@ -21,8 +21,8 @@ Before you begin, make sure you have the following:
 ## Language and Tools Used
 <p align="left"> 
 <a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a>
-<a href="https://www.gnu.org/software/console/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gnu_console/gnu_console-icon.svg" alt="console" width="40" height="40"/> </a> 
-<a href="https://httpd.apache.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/apache/apache-icon.svg" alt="console" width="40" height="40"/> </a> <a href="https://www.openssl.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/openssl/openssl-ar21.svg" alt="console" width="60" height="40"/> </a>
+<a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash" width="40" height="40"/> </a> 
+<a href="https://httpd.apache.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/apache/apache-icon.svg" alt="bash" width="40" height="40"/> </a> <a href="https://www.openssl.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/openssl/openssl-ar21.svg" alt="console" width="60" height="40"/> </a>
 </p>
 
 
