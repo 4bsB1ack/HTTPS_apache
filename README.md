@@ -72,8 +72,6 @@ req: PKCS#10 certificate request and certificate generating utility.
 -sha256: Uses the SHA-256 algorithm to create the certificate hash.
 -days: Specifies the number of days to certify the certificate for.
 -out: Specifies the filename to write the newly created certificate to.
--subj: Specifies the subject information to be used for the certificate.
-'/CN=My RootCA/C=DZ/ST=TO/L=TiziOuzou/O=MyOrganisation' : Specifies the subject information to be used for the certificate.
 ~~~
 
 ### Generate Server Certificate Signing Request (CSR)
@@ -89,8 +87,6 @@ req: PKCS#10 certificate request and certificate generating utility.
 -newkey: Creates a new certificate request and a new private key.
 rsa:4096: Specifies the number of bits in the key to create.
 -keyout: Specifies the filename to write the newly created private key to.
--subj: Specifies the subject information to be used for the certificate.
-'/CN=My firewall/C=DZ/ST=TO/L=TiziOuzou/O=MyOrganisation' : Specifies the subject information to be used for the certificate.
 ~~~
 
 ### Sign Server CSR with Root CA
@@ -135,7 +131,7 @@ nano: A text editor.
 ~~~
 
 `the content of the file :`
-```bash
+```conf
 <VirtualHost *:443>
    ServerName myserver.local
    DocumentRoot /var/www/myserver.local
@@ -162,7 +158,7 @@ mkdir: Creates a new directory.
 sudo nano /var/www/myserver.local/index.html
 ```
 `the content of the file :`
-```bash
+```html
 <html>
   <head>
     <title>HTTPS Lab</title>
@@ -277,7 +273,7 @@ nano: A text editor.
 ~~~
 
 `add this content to the file :`
-```bash
+```conf
 <VirtualHost *:80>
    ServerName myserver.local
    Redirect permanent / https://myserver.local/
@@ -295,5 +291,3 @@ sudo: Runs the command as root.
 systemctl: Controls the systemd system and service manager.
 restart: Restarts the Apache service.
 ~~~
-
-
