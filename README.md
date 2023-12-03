@@ -21,8 +21,8 @@ Before you begin, make sure you have the following:
 ## Language and Tools Used
 <p align="left"> 
 <a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a>
-<a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash" width="40" height="40"/> </a> 
-<a href="https://httpd.apache.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/apache/apache-icon.svg" alt="bash" width="40" height="40"/> </a> <a href="https://www.openssl.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/openssl/openssl-ar21.svg" alt="bash" width="60" height="40"/> </a>
+<a href="https://www.gnu.org/software/shell/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gnu_shell/gnu_shell-icon.svg" alt="shell" width="40" height="40"/> </a> 
+<a href="https://httpd.apache.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/apache/apache-icon.svg" alt="shell" width="40" height="40"/> </a> <a href="https://www.openssl.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/openssl/openssl-ar21.svg" alt="shell" width="60" height="40"/> </a>
 </p>
 
 
@@ -30,7 +30,7 @@ Before you begin, make sure you have the following:
 
 
 ### Create Directory
-```bash
+```shell
 mkdir https_lab
 cd https_lab
 ```
@@ -45,7 +45,7 @@ cd https_lab: Changes the current working directory to https_lab.
 
 ### Generate Root CA Private Key
 
-```bash
+```shell
 openssl genrsa -aes256 -out MyOrg_rootCA.key 4096
 ```
 `the command in details :`
@@ -59,7 +59,7 @@ genrsa: Generates an RSA private key.
 
 
 ### Create Self-Signed Root CA Certificate
-```bash
+```shell
 openssl req -x509 -new -nodes -key MyOrg_rootCA.key -sha256 -days 1826 -out MyOrg_rootCA.crt 
 ```
 `the command in details :`
@@ -75,7 +75,7 @@ req: PKCS#10 certificate request and certificate generating utility.
 ~~~
 
 ### Generate Server Certificate Signing Request (CSR)
-```bash
+```shell
 openssl req -new -nodes -out myserver.local.csr -newkey rsa:4096 -keyout myserver.local.key 
 ```
 `the command in details :`
@@ -90,7 +90,7 @@ rsa:4096: Specifies the number of bits in the key to create.
 ~~~
 
 ### Sign Server CSR with Root CA
-```bash
+```shell
 openssl x509 -req -in myserver.local.csr -CA MyOrg_rootCA.crt -CAkey MyOrg_rootCA.key -CAcreateserial -out myserver.local.crt -days 365 -sha256
 ```
 `the command in details :`
@@ -109,7 +109,7 @@ x509: Certificate display and signing utility.
 ## II- Apache configuration:
 
 ### Enable SSL Module for Apache
-```bash
+```shell
 sudo a2enmod ssl
 ```
 `the command in details :`
@@ -120,7 +120,7 @@ ssl: Specifies the module to enable.
 ~~~
 
 ### Edit Apache Virtual Host Configuration
-```bash
+```shell
 sudo nano /etc/apache2/sites-available/myserver.local.conf
 ```
 `the command in details :`
@@ -143,7 +143,7 @@ nano: A text editor.
 ```
 
 ### Create Document Root Directory
-```bash
+```shell
 sudo mkdir /var/www/myserver.local
 ```
 `the command in details :`
@@ -154,7 +154,7 @@ mkdir: Creates a new directory.
 ~~~
 
 ### Create Index File
-```bash
+```shell
 sudo nano /var/www/myserver.local/index.html
 ```
 `the content of the file :`
@@ -171,7 +171,7 @@ sudo nano /var/www/myserver.local/index.html
 
 ### Enable Site  Configuration
 
-```bash
+```shell
 sudo a2ensite myserver.local.conf
 ```
 
@@ -183,7 +183,7 @@ myserver.local.conf: Specifies the site to enable.
 ~~~
 
 ### Restart Apache
-```bash
+```shell
 sudo systemctl restart apache2
 ```
 
@@ -195,7 +195,7 @@ restart: Restarts the Apache service.
 ~~~
 
 ### Test Apache Configuration
-```bash
+```shell
 sudo apachectl configtest
 ```
 `the command in details :`
@@ -206,7 +206,7 @@ configtest: Tests the Apache configuration file for errors.
 ~~~
 
 ### Reload Apache
-```bash
+```shell
 sudo systemctl reload apache2
 ```
 `the command in details :`
@@ -217,7 +217,7 @@ reload: Reloads the Apache service.
 ~~~
 
 ## III- Enable UFW Firewall
-```bash
+```shell
 sudo ufw enable
 ```
 `the command in details :`
@@ -228,7 +228,7 @@ enable: Enables the firewall.
 ~~~
 
 ### Check UFW Status
-```bash
+```shell
 sudo ufw status
 ```
 `the command in details :`
@@ -239,7 +239,7 @@ status: Displays the status of the firewall.
 ~~~
 
 ### List Available Application Profiles in UFW
-```bash
+```shell
 sudo ufw applist
 ```
 `the command in details :`
@@ -250,7 +250,7 @@ applist: Displays a list of available application profiles.
 ~~~
 
 ### Allow Web Traffic (HTTP and HTTPS)
-```bash
+```shell
 sudo ufw allow "WWW Full"
 ```
 `the command in details :`
@@ -262,7 +262,7 @@ allow: Allows traffic.
 ~~~
 
 ## IV- Redirect HTTP to HTTPS
-```bash
+```shell
 sudo nano /etc/apache2/sites-available/myserver.local.conf
 ```
 `the command in details :`
@@ -282,7 +282,7 @@ nano: A text editor.
 ```
 
 ### Restart Apache
-```bash
+```shell
 sudo systemctl restart apache2
 ```
 `the command in details :`
@@ -291,3 +291,5 @@ sudo: Runs the command as root.
 systemctl: Controls the systemd system and service manager.
 restart: Restarts the Apache service.
 ~~~
+
+
